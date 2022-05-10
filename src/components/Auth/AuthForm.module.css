@@ -36,6 +36,10 @@
   padding: 0.25rem;
 }
 
+.error {
+  color: white;
+}
+
 .actions {
   margin-top: 1.5rem;
   display: flex;

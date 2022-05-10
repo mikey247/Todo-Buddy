@@ -80,7 +80,7 @@ const AuthForm = () => {
             required
             ref={passwordInputRef}
           />
-          {requestError ? <p>{requestError}</p> : null}
+          {requestError ? <p className={classes.error}>{requestError}</p> : null}
         </div>
         <div className={classes.actions}>
           <button>{isLogin ? "Login" : "Create Account"}</button>
