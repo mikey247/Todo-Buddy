@@ -6,18 +6,22 @@ import AuthContext from "../../store/authContext";
 
 const AddTodo = () => {
   const [title, setTitle] = useState("");
+  const [filter, setFilter] = useState("");
   const authCtx = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title !== "") {
+      console.log(filter);
       await addDoc(collection(db, "todos"), {
         title,
         completed: false,
         userId: authCtx.userId,
+        category: filter,
       });
       setTitle("");
     }
+    setFilter("");
   };
 
   return (
@@ -25,12 +29,30 @@ const AddTodo = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter todos..."
+          placeholder="Enter todo..."
           onChange={(e) => {
             setTitle(e.target.value);
           }}
           value={title}
         />
+        <div className={classes.category}>
+          <p>Enter Category:</p>
+          <select
+            onChange={(e) => {
+              const selected = e.target.value;
+              setFilter(selected);
+              console.log(filter);
+            }}
+            value={filter}
+            required
+          >
+            <option value="">...</option>
+            <option value="work">Work</option>
+            <option value="family">Family</option>
+            <option value="leisure">Lesiure</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
         <div className={classes.actions}>
           <button>Add New Todo</button>
         </div>

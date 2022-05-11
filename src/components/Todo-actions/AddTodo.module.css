@@ -33,3 +33,17 @@
   padding: 0.5rem 1rem;
   margin-right: 4px;
 }
+.category {
+  display: flex;
+}
+.category select {
+  font: inherit;
+  background-color: #f1e1fc;
+  color: #38015c;
+  border-radius: 4px;
+  border: 1px solid white;
+  width: 60%;
+  text-align: left;
+  margin: 1rem 0.5rem;
+  padding: 5px;
+}

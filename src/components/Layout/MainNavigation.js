@@ -9,6 +9,7 @@ const MainNavigation = () => {
 
   const isLoggedIn = authCtx.isLoggedin;
   const logoutHandler = authCtx.logout;
+  const userEmail = authCtx.userEmail;
 
   return (
     <header className={classes.header}>
@@ -25,7 +26,7 @@ const MainNavigation = () => {
 
           {isLoggedIn && (
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">Hello, {userEmail}</Link>
             </li>
           )}
 

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import AddTodo from "../Todo-actions/AddTodo";
 import AuthContext from "../../store/authContext";
 import classes from "./StartingPageContent.module.css";
-import Todo from "../Todo-actions/Todo";
+// import Todo from "../Todo-actions/Todo";
 import { db } from "../../firebase/firebase";
 import {
   collection,
@@ -12,6 +12,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import TodoList from "./Todo-List";
 
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
@@ -47,7 +48,7 @@ const StartingPageContent = () => {
       <h1>To-Do or Not To-do</h1>
       <AddTodo />
       <div>
-        {todos.map((todo) => (
+        {/* {todos.map((todo) => (
           <Todo
             key={todo.id}
             todo={todo}
@@ -55,8 +56,14 @@ const StartingPageContent = () => {
             handleDelete={handleDelete}
             handleEdit={handleEdit}
           />
-        ))}
+        ))} */}
       </div>
+      <TodoList
+        todos={todos}
+        toggleComplete={toggleComplete}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </section>
   );
 };

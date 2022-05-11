@@ -56,7 +56,7 @@ const AuthForm = () => {
       })
       .then((data) => {
         console.log(data);
-        authCtx.login(data.idToken, data.localId);
+        authCtx.login(data.idToken, data.localId, data.email);
         navigate("/");
       })
       .catch((err) => {
@@ -80,7 +80,9 @@ const AuthForm = () => {
             required
             ref={passwordInputRef}
           />
-          {requestError ? <p className={classes.error}>{requestError}</p> : null}
+          {requestError ? (
+            <p className={classes.error}>{requestError}</p>
+          ) : null}
         </div>
         <div className={classes.actions}>
           <button>{isLogin ? "Login" : "Create Account"}</button>
