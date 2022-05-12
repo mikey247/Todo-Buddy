@@ -6,22 +6,23 @@ import AuthContext from "../../store/authContext";
 
 const AddTodo = () => {
   const [title, setTitle] = useState("");
-  const [filter, setFilter] = useState("");
+  const [category, setCategory] = useState("");
   const authCtx = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title !== "") {
-      console.log(filter);
+      // console.log(category);
       await addDoc(collection(db, "todos"), {
         title,
         completed: false,
         userId: authCtx.userId,
-        category: filter,
+        category: category,
+        creator: authCtx.userEmail,
       });
       setTitle("");
     }
-    setFilter("");
+    setCategory("");
   };
 
   return (
@@ -40,10 +41,10 @@ const AddTodo = () => {
           <select
             onChange={(e) => {
               const selected = e.target.value;
-              setFilter(selected);
-              console.log(filter);
+              setCategory(selected);
+              // console.log(category);
             }}
-            value={filter}
+            value={category}
             required
           >
             <option value="">...</option>

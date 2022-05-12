@@ -13,6 +13,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import TodoList from "./Todo-List";
+const adminId = "5GnNWvrN23P2Gv87aA6Vbo1ZYnx2";
 
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
@@ -25,10 +26,16 @@ const StartingPageContent = () => {
       querySnapshot.forEach((doc) => {
         todosArray.push({ ...doc.data(), id: doc.id });
       });
-      const filteredTodos = todosArray.filter(
-        (todo) => todo.userId === authCtx.userId
-      );
-      setTodos(filteredTodos);
+      let filteredTodos = [];
+      if (authCtx.userId === adminId) {
+        setTodos(todosArray);
+        // console.log(todosArray);
+      } else {
+        filteredTodos = todosArray.filter(
+          (todo) => todo.userId === authCtx.userId
+        );
+        setTodos(filteredTodos);
+      }
     });
     return () => unsub();
   }, [authCtx.userId]);
@@ -47,17 +54,7 @@ const StartingPageContent = () => {
     <section className={classes.starting}>
       <h1>To-Do or Not To-do</h1>
       <AddTodo />
-      <div>
-        {/* {todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            toggleComplete={toggleComplete}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-          />
-        ))} */}
-      </div>
+
       <TodoList
         todos={todos}
         toggleComplete={toggleComplete}

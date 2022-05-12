@@ -7,6 +7,7 @@ const AuthContext = createContext({
   logout: () => {},
   userId: "",
   userEmail: "",
+  isAdmin: false,
 });
 
 export const AuthContextProvider = (props) => {
@@ -18,6 +19,7 @@ export const AuthContextProvider = (props) => {
   const [userEmail, setUserEmail] = useState(initialUserEmail);
 
   const userIsLoggedIn = !!token;
+  const isAdmin = userId === "5GnNWvrN23P2Gv87aA6Vbo1ZYnx2";
 
   const loginHandler = (token, localId, email) => {
     setToken(token);
@@ -40,6 +42,7 @@ export const AuthContextProvider = (props) => {
     logout: logoutndler,
     userId: userId,
     userEmail: userEmail,
+    isAdmin: isAdmin,
   };
 
   return (
