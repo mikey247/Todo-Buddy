@@ -33,6 +33,11 @@
   padding: 0.5rem 1rem;
   margin-right: 4px;
 }
+.actions button:hover {
+  background-color: wheat;
+  border-color: #873abb;
+  color: #873abb;
+}
 .category {
   display: flex;
 }

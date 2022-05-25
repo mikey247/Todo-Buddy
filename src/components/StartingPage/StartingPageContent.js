@@ -29,7 +29,6 @@ const StartingPageContent = () => {
       let filteredTodos = [];
       if (authCtx.userId === adminId) {
         setTodos(todosArray);
-        // console.log(todosArray);
       } else {
         filteredTodos = todosArray.filter(
           (todo) => todo.userId === authCtx.userId

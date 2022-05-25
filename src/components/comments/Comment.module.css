@@ -1,0 +1,24 @@
+.actions {
+  margin-top: 1rem;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 4px;
+}
+
+.actions button:hover {
+  background-color: wheat;
+  border-color: #873abb;
+  color: #873abb;
+}
+.replies {
+  /* margin-left: 3rem; */
+  /* border: 2px solid blue; */
+}
