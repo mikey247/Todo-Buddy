@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import classes from "./CommentForm.module.css";
+import AuthContext from "../../store/authContext";
 
-const CommentForm = ({ parentId, action, done, handleCommenting }) => {
+const CommentForm = ({ parentId, action, done, handleCommenting, owner }) => {
   const [enteredComment, setEnteredComment] = useState("");
+  const ctx = useContext(AuthContext);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -18,6 +20,8 @@ const CommentForm = ({ parentId, action, done, handleCommenting }) => {
       await addDoc(collection(db, "comments"), {
         comment: enteredComment,
         parent: parentId,
+        sender: ctx.userEmail,
+        replyingTo: owner,
       });
       setEnteredComment("");
       handleCommenting();

@@ -7,24 +7,29 @@
   padding: 0.5rem;
   font-size: 14px;
 }
-
+.body p {
+  text-align: left !important;
+}
+.body h3 {
+  text-align: left !important;
+}
 .actions {
-    margin-top: 1rem;
-  }
-  
-  .actions button {
-    cursor: pointer;
-    font: inherit;
-    color: white;
-    background-color: #9f5ccc;
-    border: 1px solid #9f5ccc;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    margin-right: 4px;
-  }
-  
-  .actions button:hover {
-    background-color: wheat;
-    border-color: #873abb;
-    color: #873abb;
-  }
+  margin-top: 1rem;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 4px;
+}
+
+.actions button:hover {
+  background-color: wheat;
+  border-color: #873abb;
+  color: #873abb;
+}

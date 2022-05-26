@@ -1,6 +1,6 @@
 import { db } from "../../firebase/firebase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import CommentForm from "./CommentForm";
 import classes from "./Comment.module.css";
@@ -9,8 +9,12 @@ import Reply from "./Reply";
 import { FiEdit2 } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { BiCommentCheck } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+
+import AuthContext from "../../store/authContext";
 
 const Comment = (props) => {
+  const ctx = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [newComment, setNewComment] = useState(props.body);
   const [isReplying, setIsReplying] = useState(false);
@@ -52,10 +56,23 @@ const Comment = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(replies);
+
   return (
     <>
       <div className={classes.body}>
-        <p>{props.body}</p>
+        <h3>
+          <span>
+            <CgProfile />
+          </span>
+          {props.sender}
+        </h3>
+        <p>
+          <span style={{ color: "brown" }}>
+            {ctx.userEmail === props.receiver ? "" : `@${props.receiver} `}
+          </span>
+          {props.body}
+        </p>
       </div>
 
       {isEditing && (
@@ -85,6 +102,7 @@ const Comment = (props) => {
 
           {isReplying && (
             <CommentForm
+              receiver={props.receiver}
               parentId={props.id}
               action={"Reply"}
               done={isReplying}
@@ -99,7 +117,13 @@ const Comment = (props) => {
           {replies.length > 0 &&
             "Replies" &&
             replies.map((reply) => (
-              <Reply body={reply.comment} key={reply.id} id={reply.id} />
+              <Reply
+                receiver={reply.replyingTo}
+                sender={reply.sender}
+                body={reply.comment}
+                key={reply.id}
+                id={reply.id}
+              />
             ))}
         </div>
       </div>

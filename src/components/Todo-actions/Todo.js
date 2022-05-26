@@ -11,6 +11,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiCommentCheck } from "react-icons/bi";
 
 const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
+  console.log(todo);
   const [newTitle, setNewTitle] = useState(todo.title);
   const authCtx = useContext(AuthContext);
   const [comments, setComments] = useState([]);
@@ -42,12 +43,13 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
         (comment) => comment.parent === todo.id
       );
       setComments(filteredComments);
-      // console.log(comments);
     });
     return () => unsub();
 
     // eslint-disable-next-line
   }, [todo.id]);
+
+  console.log(comments);
 
   return (
     <div className={classes.auth}>
@@ -83,6 +85,7 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
       <div className={classes.commentForm}>
         {isCommenting && (
           <CommentForm
+            owner={todo.creator}
             parentId={todo.id}
             action={"comment"}
             done={isCommenting}
@@ -93,7 +96,13 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
 
       <h2 style={{ color: "wheat" }}>Comments</h2>
       {comments.map((comment) => (
-        <Comment body={comment.comment} key={comment.id} id={comment.id} />
+        <Comment
+          body={comment.comment}
+          key={comment.id}
+          id={comment.id}
+          receiver={comment.replyingTo}
+          sender={comment.sender}
+        />
       ))}
     </div>
   );

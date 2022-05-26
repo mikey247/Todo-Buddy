@@ -1,12 +1,15 @@
 import { db } from "../../firebase/firebase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import classes from "./Reply.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { FiEdit2 } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
+import AuthContext from "../../store/authContext";
+import { CgProfile } from "react-icons/cg";
 
 const Reply = (props) => {
+  const ctx = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [newComment, setNewComment] = useState(props.body);
   // const [isReplying, setIsReplying] = useState(false);
@@ -30,7 +33,18 @@ const Reply = (props) => {
   return (
     <>
       <div className={classes.body}>
-        <p>{props.body}</p>
+        <h3>
+          <span>
+            <CgProfile />
+          </span>
+          {props.sender}
+        </h3>
+        <p>
+          <span style={{ color: "brown" }}>
+            {ctx.userEmail === props.receiver ? "" : `@${props.receiver} `}
+          </span>
+          {props.body}
+        </p>
       </div>
 
       {isEditing && (
