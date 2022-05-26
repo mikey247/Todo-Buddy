@@ -3,13 +3,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import classes from "./CommentForm.module.css";
 
-const CommentForm = ({ parentId, action }) => {
+const CommentForm = ({ parentId, action, done, handleCommenting }) => {
   const [enteredComment, setEnteredComment] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
     setEnteredComment(e.target.value);
-    console.log(enteredComment);
+    // console.log(enteredComment);
   };
 
   const handleSubmit = async (e) => {
@@ -20,23 +20,34 @@ const CommentForm = ({ parentId, action }) => {
         parent: parentId,
       });
       setEnteredComment("");
+      handleCommenting();
+      // console.log(done);
     }
   };
 
   return (
-    <form action="" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        onChange={handleChange}
-        value={enteredComment}
-        placeholder={
-          action === "Reply" ? "Reply this comment" : "Leave a comment"
-        }
-      />
-      <div className={classes.actions}>
-        <button>{action}</button>
-      </div>
-    </form>
+    <>
+      {done === true && (
+        <form action="" onSubmit={handleSubmit}>
+          <div className={classes.commentBox}>
+            <textarea
+              name=""
+              id=""
+              cols="10"
+              rows="10"
+              onChange={handleChange}
+              value={enteredComment}
+              placeholder={
+                action === "Reply" ? "Reply this comment" : "Leave a comment"
+              }
+            ></textarea>
+          </div>
+          <div className={classes.actions}>
+            <button>{action}</button>
+          </div>
+        </form>
+      )}
+    </>
   );
 };
 

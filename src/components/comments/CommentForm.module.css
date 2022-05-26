@@ -18,3 +18,7 @@
   border-color: #873abb;
   color: #873abb;
 }
+
+.commentBox textarea {
+  height: 5rem;
+}

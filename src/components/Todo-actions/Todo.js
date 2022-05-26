@@ -5,11 +5,16 @@ import CommentForm from "../comments/CommentForm";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import Comment from "../comments/Comment";
+import { BsCheckLg } from "react-icons/bs";
+import { FiEdit2 } from "react-icons/fi";
+import { AiFillDelete } from "react-icons/ai";
+import { BiCommentCheck } from "react-icons/bi";
 
 const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
   const [newTitle, setNewTitle] = useState(todo.title);
   const authCtx = useContext(AuthContext);
   const [comments, setComments] = useState([]);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -19,6 +24,10 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
       todo.title = "";
       setNewTitle(e.target.value);
     }
+  };
+
+  const handleCommenting = () => {
+    setIsCommenting(!isCommenting);
   };
 
   useEffect(() => {
@@ -33,7 +42,7 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
         (comment) => comment.parent === todo.id
       );
       setComments(filteredComments);
-      console.log(comments);
+      // console.log(comments);
     });
     return () => unsub();
 
@@ -52,18 +61,37 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
       {authCtx.isAdmin === true && (
         <p className={classes.creatorText}>Created by:{todo.creator}</p>
       )}
+
       <div className={classes.actions}>
         <button onClick={() => toggleComplete(todo)}>
-          {todo.completed === false ? "Mark complete" : "Mark incomplete"}
+          <BsCheckLg />
         </button>
-        <button onClick={() => handleEdit(todo, newTitle)}> Edit</button>
-        <button onClick={() => handleDelete(todo.id)}>Delete</button>
+
+        <button onClick={() => handleEdit(todo, newTitle)}>
+          <FiEdit2 />
+        </button>
+
+        <button onClick={() => handleDelete(todo.id)}>
+          <AiFillDelete />
+        </button>
+
+        <button onClick={handleCommenting}>
+          <BiCommentCheck />
+        </button>
       </div>
 
-      <h2>Comments</h2>
+      <div className={classes.commentForm}>
+        {isCommenting && (
+          <CommentForm
+            parentId={todo.id}
+            action={"comment"}
+            done={isCommenting}
+            handleCommenting={handleCommenting}
+          />
+        )}
+      </div>
 
-      <CommentForm parentId={todo.id} action={"comment"} />
-
+      <h2 style={{ color: "wheat" }}>Comments</h2>
       {comments.map((comment) => (
         <Comment body={comment.comment} key={comment.id} id={comment.id} />
       ))}

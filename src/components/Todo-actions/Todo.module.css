@@ -15,7 +15,17 @@
   color: #38015c;
   border-radius: 4px;
   border: 1px solid white;
-  width: 100%;
+  width: 60%;
+  text-align: left;
+  padding: 0.25rem;
+}
+.auth textarea {
+  font: inherit;
+  background-color: #f1e1fc;
+  color: #38015c;
+  border-radius: 4px;
+  border: 1px solid white;
+  width: 50%;
   text-align: left;
   padding: 0.25rem;
 }
@@ -45,4 +55,7 @@
 }
 .creatorText {
   color: white;
+}
+.commentForm {
+  margin-top: 3rem;
 }

@@ -4,12 +4,18 @@ import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import CommentForm from "./CommentForm";
 import classes from "./Comment.module.css";
+import Reply from "./Reply";
+
+import { FiEdit2 } from "react-icons/fi";
+import { AiFillDelete } from "react-icons/ai";
+import { BiCommentCheck } from "react-icons/bi";
 
 const Comment = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newComment, setNewComment] = useState(props.body);
   const [isReplying, setIsReplying] = useState(false);
   const [replies, setReplies] = useState([]);
+  // const [isCommenting, setIsCommenting] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -22,6 +28,10 @@ const Comment = (props) => {
     await updateDoc(doc(db, "comments", id), { comment: newComment });
     setIsEditing(false);
     setNewComment("");
+  };
+  const handleCommenting = () => {
+    // setIsCommenting(!isCommenting);
+    setIsReplying(!isReplying);
   };
 
   useEffect(() => {
@@ -44,11 +54,14 @@ const Comment = (props) => {
 
   return (
     <>
-      <p>{props.body}</p>
+      <div className={classes.body}>
+        <p>{props.body}</p>
+      </div>
 
       {isEditing && (
         <div className={classes.actions}>
-          <input type="text" value={newComment} onChange={handleChange} />
+          <textarea type="text" value={newComment} onChange={handleChange} />
+          <br /> <br />
           <button onClick={() => handleEdit(props.id, newComment)}>Save</button>
           <button onClick={() => setIsEditing(!isEditing)}>Cancel</button>
         </div>
@@ -57,21 +70,38 @@ const Comment = (props) => {
       {!isEditing && (
         <>
           <div className={classes.actions}>
-            <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
-            <button onClick={() => handleDelete(props.id)}>Delete</button>
-            <button onClick={() => setIsReplying(!isReplying)}>Reply</button>
+            <button onClick={() => setIsEditing(!isEditing)}>
+              <FiEdit2 />
+            </button>
+            <button onClick={() => handleDelete(props.id)}>
+              {" "}
+              <AiFillDelete />
+            </button>
+            <button onClick={handleCommenting}>
+              {" "}
+              <BiCommentCheck />
+            </button>
           </div>
-          {isReplying && <CommentForm parentId={props.id} action={"Reply"} />}
+
+          {isReplying && (
+            <CommentForm
+              parentId={props.id}
+              action={"Reply"}
+              done={isReplying}
+              handleCommenting={handleCommenting}
+            />
+          )}
         </>
       )}
 
-      <div className={classes.replies}>
-        <h3>Replies</h3>
-        {replies.length > 0 &&
-          "Replies" &&
-          replies.map((reply) => (
-            <Comment body={reply.comment} key={reply.id} id={reply.id} />
-          ))}
+      <div className={classes.repliesContainer}>
+        <div className={classes.replies}>
+          {replies.length > 0 &&
+            "Replies" &&
+            replies.map((reply) => (
+              <Reply body={reply.comment} key={reply.id} id={reply.id} />
+            ))}
+        </div>
       </div>
     </>
   );
