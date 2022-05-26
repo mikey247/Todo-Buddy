@@ -20,6 +20,7 @@
 }
 .actions textarea {
   height: 10rem;
+  width: 20rem !important;
 }
 .repliesContainer {
   display: grid;

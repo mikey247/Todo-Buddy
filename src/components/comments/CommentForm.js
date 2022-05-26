@@ -4,7 +4,13 @@ import { db } from "../../firebase/firebase";
 import classes from "./CommentForm.module.css";
 import AuthContext from "../../store/authContext";
 
-const CommentForm = ({ parentId, action, done, handleCommenting, owner }) => {
+const CommentForm = ({
+  parentId,
+  action,
+  done,
+  handleCommenting,
+  receiver,
+}) => {
   const [enteredComment, setEnteredComment] = useState("");
   const ctx = useContext(AuthContext);
 
@@ -21,7 +27,7 @@ const CommentForm = ({ parentId, action, done, handleCommenting, owner }) => {
         comment: enteredComment,
         parent: parentId,
         sender: ctx.userEmail,
-        replyingTo: owner,
+        replyingTo: receiver,
       });
       setEnteredComment("");
       handleCommenting();

@@ -16,7 +16,10 @@
 .actions {
   margin-top: 1rem;
 }
-
+.actions textarea {
+  height: 10rem;
+  width: 20rem !important;
+}
 .actions button {
   cursor: pointer;
   font: inherit;

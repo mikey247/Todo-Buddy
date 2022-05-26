@@ -85,7 +85,7 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
       <div className={classes.commentForm}>
         {isCommenting && (
           <CommentForm
-            owner={todo.creator}
+            receiver={todo.creator}
             parentId={todo.id}
             action={"comment"}
             done={isCommenting}
