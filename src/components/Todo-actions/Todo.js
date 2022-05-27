@@ -104,6 +104,8 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
           id={comment.id}
           receiver={comment.replyingTo}
           sender={comment.sender}
+          upvotes={comment.upvotes}
+          downvotes={comment.downvotes}
         />
       ))}
     </div>

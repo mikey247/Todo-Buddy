@@ -17,9 +17,6 @@ import TodoList from "./Todo-List";
 const adminId = "5GnNWvrN23P2Gv87aA6Vbo1ZYnx2";
 
 const StartingPageContent = () => {
-  let time = new Date();
-  console.log(time);
-
   const authCtx = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
 

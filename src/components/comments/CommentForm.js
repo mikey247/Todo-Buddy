@@ -31,6 +31,8 @@ const CommentForm = ({
         sender: ctx.userEmail,
         replyingTo: receiver,
         createdAt: serverTimestamp(),
+        upvotes: 0,
+        downvotes: 0,
       });
       setEnteredComment("");
       handleCommenting();

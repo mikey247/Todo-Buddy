@@ -7,6 +7,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import AuthContext from "../../store/authContext";
 import { CgProfile } from "react-icons/cg";
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 
 const Reply = (props) => {
   const ctx = useContext(AuthContext);
@@ -15,6 +16,16 @@ const Reply = (props) => {
   // const [isReplying, setIsReplying] = useState(false);
   // const [replies, setReplies] = useState([]);
   // const [isCommenting, setIsCommenting] = useState(false);
+
+  const handleVote = async (id, direction) => {
+    if (direction === "upvote") {
+      await updateDoc(doc(db, "comments", id), { upvotes: props.upvotes + 1 });
+    } else {
+      await updateDoc(doc(db, "comments", id), {
+        downvotes: props.downvotes + 1,
+      });
+    }
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -45,6 +56,25 @@ const Reply = (props) => {
           </span>
           {props.body}
         </p>
+        <div className={classes.votes}>
+          <p onClick={() => handleVote(props.id, "upvote")}>
+            {props.upvotes} Upvotes{" "}
+            <span>
+              <button>
+                <BiUpvote />
+              </button>
+            </span>
+          </p>
+          <p onClick={() => handleVote(props.id, "downvote")}>
+            {props.downvotes} Downvotes{" "}
+            <span>
+              {" "}
+              <button>
+                <BiDownvote />
+              </button>
+            </span>
+          </p>
+        </div>
       </div>
 
       {isEditing && (

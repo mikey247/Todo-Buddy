@@ -49,3 +49,25 @@
 .body h3 {
   text-align: left !important;
 }
+.votes {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+.votes button {
+  padding: 5px;
+  background-color: #9f5ccc;
+  color: wheat;
+  border: none;
+  border-radius: 5px;
+}
+.votes button:hover {
+  cursor: pointer;
+
+  background-color: wheat;
+  color: #9f5ccc;
+}
+.votes p:hover {
+  cursor: pointer;
+  color: white;
+}

@@ -8,7 +8,7 @@ import Reply from "./Reply";
 
 import { FiEdit2 } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-import { BiCommentCheck } from "react-icons/bi";
+import { BiCommentCheck, BiUpvote, BiDownvote } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 
 import AuthContext from "../../store/authContext";
@@ -38,6 +38,18 @@ const Comment = (props) => {
     setIsReplying(!isReplying);
   };
 
+  const handleVote = async (id, direction) => {
+    if (direction === "upvote") {
+      await updateDoc(doc(db, "comments", id), { upvotes: props.upvotes + 1 });
+    } else {
+      await updateDoc(doc(db, "comments", id), {
+        downvotes: props.downvotes + 1,
+      });
+    }
+    // setIsEditing(false);
+    // setNewComment("");
+  };
+
   useEffect(() => {
     const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(q, (querySnapshot) => {
@@ -56,8 +68,6 @@ const Comment = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  // console.log(replies);
-
   return (
     <>
       <div className={classes.body}>
@@ -73,6 +83,26 @@ const Comment = (props) => {
           </span>
           {props.body}
         </p>
+
+        <div className={classes.votes}>
+          <p onClick={() => handleVote(props.id, "upvote")}>
+            {props.upvotes} Upvotes{" "}
+            <span>
+              <button>
+                <BiUpvote />
+              </button>
+            </span>
+          </p>
+          <p onClick={() => handleVote(props.id, "downvote")}>
+            {props.downvotes} Downvotes{" "}
+            <span>
+              {" "}
+              <button>
+                <BiDownvote />
+              </button>
+            </span>
+          </p>
+        </div>
       </div>
 
       {isEditing && (
@@ -123,6 +153,8 @@ const Comment = (props) => {
                 body={reply.comment}
                 key={reply.id}
                 id={reply.id}
+                upvotes={reply.upvotes}
+                downvotes={reply.downvotes}
               />
             ))}
         </div>
