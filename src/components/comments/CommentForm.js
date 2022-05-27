@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import classes from "./CommentForm.module.css";
 import AuthContext from "../../store/authContext";
@@ -20,6 +20,8 @@ const CommentForm = ({
     // console.log(enteredComment);
   };
 
+  // const timeStamp = new Date();
+  // console.log(timeStamp);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (enteredComment !== "") {
@@ -28,6 +30,7 @@ const CommentForm = ({
         parent: parentId,
         sender: ctx.userEmail,
         replyingTo: receiver,
+        createdAt: serverTimestamp(),
       });
       setEnteredComment("");
       handleCommenting();

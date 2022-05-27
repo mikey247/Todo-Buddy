@@ -1,7 +1,7 @@
 import { db } from "../../firebase/firebase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useState, useEffect, useContext } from "react";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import CommentForm from "./CommentForm";
 import classes from "./Comment.module.css";
 import Reply from "./Reply";
@@ -39,7 +39,7 @@ const Comment = (props) => {
   };
 
   useEffect(() => {
-    const q = query(collection(db, "comments"));
+    const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(q, (querySnapshot) => {
       let repliesArray = [];
       querySnapshot.forEach((doc) => {
@@ -56,7 +56,7 @@ const Comment = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(replies);
+  // console.log(replies);
 
   return (
     <>
