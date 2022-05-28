@@ -59,6 +59,7 @@ const CommentForm = ({
           </div>
           <div className={classes.actions}>
             <button>{action}</button>
+            <button onClick={handleCommenting}> cancel</button>
           </div>
         </form>
       )}

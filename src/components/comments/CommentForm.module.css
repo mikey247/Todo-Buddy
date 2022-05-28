@@ -20,5 +20,13 @@
 }
 
 .commentBox textarea {
-  height: 5rem;
+  margin-top: 20px;
+  height: 10rem;
+  width: 18rem !important;
+}
+
+@media (max-width: 334px) {
+  .commentBox textarea {
+    width: 15rem !important;
+  }
 }
