@@ -1,0 +1,32 @@
+.actions {
+  margin-top: 1rem;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 4px;
+}
+
+.actions button:hover {
+  background-color: wheat;
+  border-color: #873abb;
+  color: #873abb;
+}
+
+.commentBox textarea {
+  margin-top: 20px;
+  height: 10rem;
+  width: 18rem !important;
+}
+
+@media (max-width: 334px) {
+  .commentBox textarea {
+    width: 15rem !important;
+  }
+}

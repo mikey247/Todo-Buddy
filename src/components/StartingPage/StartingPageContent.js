@@ -11,6 +11,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  orderBy,
 } from "firebase/firestore";
 import TodoList from "./Todo-List";
 const adminId = "5GnNWvrN23P2Gv87aA6Vbo1ZYnx2";
@@ -20,7 +21,7 @@ const StartingPageContent = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "todos"));
+    const q = query(collection(db, "todos"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(q, (querySnapshot) => {
       let todosArray = [];
       querySnapshot.forEach((doc) => {
@@ -29,7 +30,6 @@ const StartingPageContent = () => {
       let filteredTodos = [];
       if (authCtx.userId === adminId) {
         setTodos(todosArray);
-        // console.log(todosArray);
       } else {
         filteredTodos = todosArray.filter(
           (todo) => todo.userId === authCtx.userId

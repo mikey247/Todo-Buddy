@@ -1,0 +1,103 @@
+.body {
+  background-color: wheat;
+  color: #9f5ccc;
+  width: 23rem;
+  margin: 2rem auto;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.body p {
+  text-align: left !important;
+}
+.body h3 {
+  text-align: left !important;
+}
+.actions {
+  margin-top: 1rem;
+}
+.actions textarea {
+  height: 10rem;
+  width: 20rem !important;
+}
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 4px;
+}
+
+.actions button:hover {
+  background-color: wheat;
+  border-color: #873abb;
+  color: #873abb;
+}
+.votes {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+.votes button {
+  padding: 5px;
+  background-color: #9f5ccc;
+  color: wheat;
+  border: none;
+  border-radius: 5px;
+}
+.votes button:hover {
+  cursor: pointer;
+
+  background-color: wheat;
+  color: #9f5ccc;
+}
+.votes p:hover {
+  cursor: pointer;
+  color: white;
+}
+@media (max-width: 506px) {
+  .body {
+    width: 20rem;
+  }
+  .votes {
+    width: 80%;
+  }
+}
+@media (max-width: 473px) {
+  .body {
+    width: 18rem;
+  }
+  .votes {
+    width: 85%;
+  }
+}
+@media (max-width: 440px) {
+  .body {
+    width: 16rem;
+  }
+  .votes {
+    width: 100%;
+  }
+}
+/* @media (max-width: 376px) {
+  .body {
+    width: 16rem;
+  }
+} */
+
+@media (max-width: 334px) {
+  .body {
+    width: 14rem;
+  }
+  .body h3 {
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .body p {
+    font-size: 13px;
+  }
+}

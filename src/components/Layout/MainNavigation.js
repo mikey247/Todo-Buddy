@@ -13,9 +13,7 @@ const MainNavigation = () => {
 
   return (
     <header className={classes.header}>
-      <Link to="/">
-        <div className={classes.logo}>Todo Buddy</div>
-      </Link>
+      <Link to="/">{/* <div className={classes.logo}>Todo Buddy</div> */}</Link>
       <nav>
         <ul>
           {!isLoggedIn && (

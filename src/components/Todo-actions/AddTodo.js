@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import classes from "./AddTodo.module.css";
 import AuthContext from "../../store/authContext";
 
@@ -19,6 +19,7 @@ const AddTodo = () => {
         userId: authCtx.userId,
         category: category,
         creator: authCtx.userEmail,
+        createdAt: serverTimestamp(),
       });
       setTitle("");
     }
