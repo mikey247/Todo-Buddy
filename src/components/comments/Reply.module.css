@@ -89,8 +89,15 @@
   }
 } */
 
-@media (max-width: 333px) {
+@media (max-width: 334px) {
   .body {
     width: 14rem;
+  }
+  .body h3 {
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .body p {
+    font-size: 13px;
   }
 }
