@@ -38,7 +38,7 @@
   color: #873abb;
 }
 .votes {
-  width: 60%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
 }
@@ -58,4 +58,39 @@
 .votes p:hover {
   cursor: pointer;
   color: white;
+}
+@media (max-width: 506px) {
+  .body {
+    width: 20rem;
+  }
+  .votes {
+    width: 80%;
+  }
+}
+@media (max-width: 473px) {
+  .body {
+    width: 18rem;
+  }
+  .votes {
+    width: 85%;
+  }
+}
+@media (max-width: 440px) {
+  .body {
+    width: 16rem;
+  }
+  .votes {
+    width: 100%;
+  }
+}
+/* @media (max-width: 376px) {
+  .body {
+    width: 16rem;
+  }
+} */
+
+@media (max-width: 333px) {
+  .body {
+    width: 14rem;
+  }
 }

@@ -75,42 +75,31 @@ const Reply = (props) => {
             </span>
           </p>
         </div>
-      </div>
-
-      {isEditing && (
-        <div className={classes.actions}>
-          <textarea type="text" value={newComment} onChange={handleChange} />
-          <br /> <br />
-          <button onClick={() => handleEdit(props.id, newComment)}>Save</button>
-          <button onClick={() => setIsEditing(!isEditing)}>Cancel</button>
-        </div>
-      )}
-
-      <>
-        {!isEditing && (
+        {isEditing && (
           <div className={classes.actions}>
-            <button onClick={() => setIsEditing(!isEditing)}>
-              <FiEdit2 />
+            <textarea type="text" value={newComment} onChange={handleChange} />
+            <br /> <br />
+            <button onClick={() => handleEdit(props.id, newComment)}>
+              Save
             </button>
-            <button onClick={() => handleDelete(props.id)}>
-              {" "}
-              <AiFillDelete />
-            </button>
-            {/* <button onClick={handleCommenting}>
-        {" "}
-        <BiCommentCheck />
-      </button> */}
+            <button onClick={() => setIsEditing(!isEditing)}>Cancel</button>
           </div>
         )}
-        {/* {isReplying && (
-      <CommentForm
-        parentId={props.id}
-        action={"Reply"}
-        done={isReplying}
-        handleCommenting={handleCommenting}
-      />
-    )} */}
-      </>
+
+        <>
+          {!isEditing && (
+            <div className={classes.actions}>
+              <button onClick={() => setIsEditing(!isEditing)}>
+                <FiEdit2 />
+              </button>
+              <button onClick={() => handleDelete(props.id)}>
+                {" "}
+                <AiFillDelete />
+              </button>
+            </div>
+          )}
+        </>
+      </div>
     </>
   );
 };

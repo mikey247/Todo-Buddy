@@ -36,7 +36,6 @@ const CommentForm = ({
       });
       setEnteredComment("");
       handleCommenting();
-      // console.log(done);
     }
   };
 
