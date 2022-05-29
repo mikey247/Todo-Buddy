@@ -51,7 +51,6 @@ const Todo = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
   }, [todo.id]);
 
   // console.log(comments);
-  // console.log(comments.time);
 
   return (
     <div className={classes.auth}>

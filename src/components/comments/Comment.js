@@ -1,6 +1,6 @@
 import { db } from "../../firebase/firebase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import CommentForm from "./CommentForm";
 import classes from "./Comment.module.css";
@@ -11,10 +11,10 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiCommentCheck, BiUpvote, BiDownvote } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 
-import AuthContext from "../../store/authContext";
+// import AuthContext from "../../store/authContext";
 
 const Comment = (props) => {
-  const ctx = useContext(AuthContext);
+  // const ctx = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [newComment, setNewComment] = useState(props.body);
   const [isReplying, setIsReplying] = useState(false);
@@ -79,7 +79,8 @@ const Comment = (props) => {
         </h3>
         <p>
           <span style={{ color: "brown" }}>
-            {ctx.userEmail === props.receiver ? "" : `@${props.receiver} `}
+            {/* {ctx.userEmail === props.receiver ? "" : `@${props.receiver} `} */}
+            {`@${props.receiver} `}
           </span>
           {props.body}
         </p>
@@ -132,7 +133,7 @@ const Comment = (props) => {
 
           {isReplying && (
             <CommentForm
-              receiver={props.receiver}
+              receiver={props.sender}
               parentId={props.id}
               action={"Reply"}
               done={isReplying}
