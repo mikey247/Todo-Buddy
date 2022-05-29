@@ -17,11 +17,8 @@ const CommentForm = ({
   const handleChange = (e) => {
     e.preventDefault();
     setEnteredComment(e.target.value);
-    // console.log(enteredComment);
   };
 
-  // const timeStamp = new Date();
-  // console.log(timeStamp);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (enteredComment !== "") {

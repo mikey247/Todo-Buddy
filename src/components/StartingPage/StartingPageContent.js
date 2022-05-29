@@ -52,7 +52,6 @@ const StartingPageContent = () => {
 
   return (
     <section className={classes.starting}>
-      <h1>To-Do or Not To-do</h1>
       <AddTodo />
 
       <TodoList

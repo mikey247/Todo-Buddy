@@ -12,30 +12,42 @@ const MainNavigation = () => {
   const userEmail = authCtx.userEmail;
 
   return (
-    <header className={classes.header}>
-      <Link to="/">{/* <div className={classes.logo}>Todo Buddy</div> */}</Link>
-      <nav>
-        <ul>
-          {!isLoggedIn && (
-            <li>
-              <Link to="/auth">Login</Link>
-            </li>
-          )}
+    <>
+      <nav class={classes.navbar}>
+        <Link to="/">
+          <div className={classes.logo}>
+            <h3>Todo Buddy</h3>
+          </div>
+        </Link>
 
-          {isLoggedIn && (
-            <li>
-              <Link to="/profile">Hello, {userEmail}</Link>
-            </li>
-          )}
+        <ul class={classes.navLinks}>
+          <input type="checkbox" id="checkbox_toggle" />
+          <label for="checkbox_toggle" class={classes.hamburger}>
+            &#9776;
+          </label>
 
-          {isLoggedIn && (
-            <li>
-              <button onClick={logoutHandler}>Logout</button>
-            </li>
-          )}
+          <div class={classes.menu}>
+            {!isLoggedIn && (
+              <li>
+                <Link to="/auth">Login</Link>
+              </li>
+            )}
+
+            {isLoggedIn && (
+              <li>
+                <Link to="/profile">Hello, {userEmail}</Link>
+              </li>
+            )}
+
+            {isLoggedIn && (
+              <li>
+                <button onClick={logoutHandler}>Logout</button>
+              </li>
+            )}
+          </div>
         </ul>
       </nav>
-    </header>
+    </>
   );
 };
 
